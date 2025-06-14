@@ -1,4 +1,8 @@
 #!/bin/bash
 set -e
 
-docker rm -f flask-app || true
+# Stop any container running your image
+CONTAINER_ID=$(sudo docker ps -q --filter ancestor=rauw/simple-python-flask-app:latest)
+if [ -n "$CONTAINER_ID" ]; then
+  sudo docker stop $CONTAINER_ID
+fi
